@@ -12,10 +12,10 @@
 <!- Esto es un comentario  img alt="Lines of code https://img.shields.io/tokei/lines/github/ockdavid/Whatsapp_Sentiment_Analysis –>
 <!- Introduction
 Table of content
-Requirements and setup
+Folder structure
+Requirements
 Getting started
-How to deploy
-How to update
+How to 
 Commands
 –>
 
@@ -45,18 +45,9 @@ This repository provides the **whole code** that works perfectly, **comments** t
 - [I - Introduction](#i---introduction)
 - [II - Table of content](#ii---table-of-content)
 - [III - Folder structure](#iii---folder-structure)
-- [IV - Conventions, templates and labels](#iv---conventions-templates-and-labels)
-  - [A - Commit conventions](#a---commit-conventions)
-  - [B - Branch naming convention](#b---branch-naming-convention)
-  - [C - Issue template](#c---issue-template)
-  - [D - Pull request template](#d---pull-request-template)
-  - [E - Custom issues labels preset](#e---custom-issues-labels-preset)
-- [V - CI/CD, release and container registry](#v---cicd-release-and-container-registry)
-  - [A - CI](#a---ci)
-  - [B - CD](#b---cd)
-  - [C - Release](#c---release)
-  - [D - Labeler](#d---labeler)
-- [VI - Project setup](#vi---project-setup)
+- [IV - Getting started](#iv---conventions-templates-and-labels)
+- [V - Requirements](#v---cicd-release-and-container-registry)
+- [VI - How to understand](#vi---project-setup)
   - [A - Stack](#a---stack)
   - [B - Makefile](#b---makefile)
 - [VII - Contributing](#vii---contributing)
@@ -64,16 +55,12 @@ This repository provides the **whole code** that works perfectly, **comments** t
 
 ## III - Folder structure
 
-The structure of this project follows [these conventions](https://github.com/golang-standards/project-layout).
+The structure of this project.
 
-- `/.github`: Conventions, template, labels, ci, cd, settings
-- `/cmd`: main files
-- `/build`: Dockerfiles
-- `/config`: Environment files
-- `/deploy`: Docker Compose files
-- `/internal`: "private" code
-- `/pkg`: "public" code
-- `/scripts`: Makefile bash scripts for setup/install/start
+- `/Chats`: Whatsapp file exported
+- `/NLP Datacamp`: Resources 
+- `/Screenshots`: Images to show on Readme
+- `/Drafts`: Some notebook drafts before the main code 
 
 ## IV - Conventions, templates and labels
 
