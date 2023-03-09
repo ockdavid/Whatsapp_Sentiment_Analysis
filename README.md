@@ -1,6 +1,11 @@
 <p align="center">
-  <img src="./Screenshots/huggingface.png" width="200">
-  <img src="./Screenshots/whatsapp_logo.png" width="200"><br/>
+  <img src="./Screenshots/title7.png" width="800">
+</p>
+
+<p align="center">
+  
+  <img src="./Screenshots/huggingface.png" width="120">
+  <img src="./Screenshots/whatsapp_logo.png" width="120"><br/>
     <br/>
     <a href="https://github.com/gogolcorp/go-yave/releases">
       <img src="https://img.shields.io/github/v/release/gogolcorp/go-yave"/>
