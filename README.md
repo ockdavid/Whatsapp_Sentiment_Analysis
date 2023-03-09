@@ -19,6 +19,13 @@ How to update
 Commands
 –>
 
+<p align="center">
+  
+  <img src="./Screenshots/huggingface.png" width="120">
+  <img src="./Screenshots/whatsapp_logo.png" width="120">
+
+</p>
+
 
 ## I - Introduction
 
@@ -28,13 +35,10 @@ Commands
 
 In this project, we applied sentiment analysis to a WhatsApp group chat. We exported the chat to a text file and used **natural language processing** techniques to analyze the sentiments expressed in the messages. Our goal was to understand the overall sentiment of the conversation, as well as the sentiment of each person included in the chat.
 
-The purpose of this repository is to provide a **solid**, **complete** and **adaptable** base of a [Golang](https://golang.org/)-oriented product in a **project-managed** repository, in order to start a new project with a **maximum time saving**.
+The **purpose** of this repository is to demonstrate the potential of sentiment analysis in understanding the sentiment of messages on group chats and can be applied to any WhatsApp chat to gain insights into **people's feelings** about a particular topic or conversation. However, as our findings indicate, **sentiment analysis models are not perfect** and may require further refinement to increase their accuracy.
 
-This repository provides **commit writting** and **branch naming conventions**, **issues** and **pull request templates**, and a **custom issues labels preset**.
+This repository provides the **whole code** that works perfectly, **comments** to understand it, and the **model trained** to evaluate any whatsapp chat.
 
-But also **CI/CD** and **release** using [GitHub Actions](https://github.com/features/actions), [GitHub Container Registry](https://github.com/features/packages) and [Docker](https://www.docker.com/).
-
-> This repository gathers all the good practices that I have learned over time, both in terms of **organization** and **good maintenance** of a project over time as well as in terms of **automation, availability** and **consistancy**.
 
 ## II - Table of content
 
