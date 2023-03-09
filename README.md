@@ -11,6 +11,14 @@
   <img alt="GitHub followers" src="https://img.shields.io/github/followers/ockdavid?style=social"> 
 </p>
 <!- Esto es un comentario  img alt="Lines of code https://img.shields.io/tokei/lines/github/ockdavid/Whatsapp_Sentiment_Analysis –>
+<!- Introduction
+Table of content
+Requirements and setup
+Getting started
+How to deploy
+How to update
+Commands
+–>
 
 
 ## I - Introduction
