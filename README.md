@@ -6,73 +6,12 @@
 
 <p align="center">
   <a href="https://github.com/ockdavid"><img src="https://img.shields.io/badge/-GitHub-%23555.svg?logo=github-sponsors" height="20"></a>
-  <img alt="GitHub followers" src="https://img.shields.io/github/followers/ockdavid?style=social">
   <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/ockdavid/Whatsapp_Sentiment_Analysis">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ockdavid/Whatsapp_Sentiment_Analysis">
-  <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/ockdavid/Whatsapp_Sentiment_Analysis">
-
+  <img alt="GitHub followers" src="https://img.shields.io/github/followers/ockdavid?style=social"> 
 </p>
+<!- Esto es un comentario  img alt="Lines of code https://img.shields.io/tokei/lines/github/ockdavid/Whatsapp_Sentiment_Analysis –>
 
-<!-- Primera imagen con título -->
-<div style="display: inline-block; text-align: center; width: 45%;">
-  <img src="./Screenshots/huggingface.png" width="120" alt="Descripción de tu imagen 1" style="width: 20%; height: auto; margin-bottom: 10px;">
-  <img src="./Screenshots/whatsapp_logo.png" width="120" alt="Descripción de tu imagen 2" style="width: 20%; height: auto; display: block; margin-bottom: 10px;">
-  
-  <p style="font-weight: bold;">Título de la primera imagen</p>
-</div>
-
-<!-- Segunda imagen con título -->
-<div style="display: inline-block; text-align: center; width: 45%;">
-  <img src="./Screenshots/whatsapp_logo.png" width="120" alt="Descripción de tu imagen 2" style="width: 20%; height: auto; display: block; margin-bottom: 10px;">
-  <p style="font-weight: bold;">Título de la segunda imagen</p>
-</div>
-
-
-
-
-
-
-
-<p align="center">
-  
-  <img src="./Screenshots/huggingface.png" width="120">
-  <img src="./Screenshots/whatsapp_logo.png" width="120"><br/>
-    <br/>
-    <a href="https://github.com/gogolcorp/go-yave/releases">
-      <img src="https://img.shields.io/github/v/release/gogolcorp/go-yave"/>
-    </a>
-    <a href="https://github.com/gogolcorp/go-yave/commits/main">
-      <img src="https://img.shields.io/github/release-date/gogolcorp/go-yave"/>
-    </a>
-    <a href="https://github.com/gogolcorp/go-yave/issues">
-      <img src="https://img.shields.io/github/issues/gogolcorp/go-yave"/>
-    </a>
-    <a href="https://github.com/gogolcorp/go-yave/pulls">
-      <img src="https://img.shields.io/github/issues-pr/gogolcorp/go-yave"/>
-    </a>
-    <a href="https://github.com/gogolcorp/go-yave/blob/main/LICENSE">
-      <img src="https://img.shields.io/github/license/gogolcorp/go-yave"/>
-    </a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/gogolcorp/go-yave/actions/workflows/web.ci.yml">
-      <img src="https://github.com/gogolcorp/go-yave/actions/workflows/web.ci.yml/badge.svg"/>
-    </a>
-       <a href="https://github.com/gogolcorp/go-yave/actions/workflows/web.cd.yml">
-      <img src="https://github.com/gogolcorp/go-yave/actions/workflows/web.cd.yml/badge.svg"/>
-    </a>
-     <a href="https://github.com/gogolcorp/go-yave/actions/workflows/api.ci.yml">
-      <img src="https://github.com/gogolcorp/go-yave/actions/workflows/api.ci.yml/badge.svg"/>
-    </a>
-     <a href="https://github.com/gogolcorp/go-yave/actions/workflows/api.cd.yml">
-      <img src="https://github.com/gogolcorp/go-yave/actions/workflows/api.cd.yml/badge.svg"/>
-    </a>
-</p>
-
-<p align="center">
-  <a href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/creating-a-repository-from-a-template">How to use this repo as a template for your project</a>
-</p>
 
 ## I - Introduction
 
