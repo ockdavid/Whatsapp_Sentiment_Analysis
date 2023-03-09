@@ -1,5 +1,16 @@
+# Python Project
 <p align="center">
   <img src="./Screenshots/title10.png" width="800">
+  
+</p>
+
+<p align="center">
+  <a href="https://github.com/ockdavid"><img src="https://img.shields.io/badge/-GitHub-%23555.svg?logo=github-sponsors" height="20"></a>
+  <img alt="GitHub followers" src="https://img.shields.io/github/followers/ockdavid?style=social">
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/ockdavid/Whatsapp_Sentiment_Analysis">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ockdavid/Whatsapp_Sentiment_Analysis">
+  <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/ockdavid/Whatsapp_Sentiment_Analysis">
+
 </p>
 
 <!-- Primera imagen con título -->
