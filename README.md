@@ -1,6 +1,26 @@
 <p align="center">
-  <img src="./Screenshots/title7.png" width="800">
+  <img src="./Screenshots/title10.png" width="800">
 </p>
+
+<!-- Primera imagen con título -->
+<div style="display: inline-block; text-align: center; width: 45%;">
+  <img src="./Screenshots/huggingface.png" width="120" alt="Descripción de tu imagen 1" style="width: 20%; height: auto; margin-bottom: 10px;">
+  <img src="./Screenshots/whatsapp_logo.png" width="120" alt="Descripción de tu imagen 2" style="width: 20%; height: auto; display: block; margin-bottom: 10px;">
+  
+  <p style="font-weight: bold;">Título de la primera imagen</p>
+</div>
+
+<!-- Segunda imagen con título -->
+<div style="display: inline-block; text-align: center; width: 45%;">
+  <img src="./Screenshots/whatsapp_logo.png" width="120" alt="Descripción de tu imagen 2" style="width: 20%; height: auto; display: block; margin-bottom: 10px;">
+  <p style="font-weight: bold;">Título de la segunda imagen</p>
+</div>
+
+
+
+
+
+
 
 <p align="center">
   
