@@ -1,0 +1,7 @@
+Pags
+https://realpython.com/natural-language-processing-spacy-python/
+https://www.kaggle.com/code?tagIds=13204
+https://www.kaggle.com/code/majinx/nlp-eda-tfidf-wordcloud-lemmatization
+https://www.kaggle.com/code/rohitgadhwar/sentiment-analysis-using-transformers
+https://www.nltk.org/ 	
+https://www.kdnuggets.com/2018/03/5-things-sentiment-analysis-classification.html
