@@ -77,11 +77,11 @@ The structure of this project.
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 See deployment for notes on how to deploy the project on a live system. 
 
-In this Readme file is gonna be explained some parts of the code because the ipynb file already has comments that explain everything.
+In this Readme file is gonna be explained only some parts of the code because the ipynb file already has comments that explain everything.
 
 
 ## V - Requirements
-There are some requirements to follow whether you want to play with this code.
+There are some requirements to follow whether you want to play with this notebook.
 
 ### A - Export WhatsApp chat
 Go to the WhatsApp chat you want to export and click on the 3 points that are on the right corner.
@@ -185,6 +185,14 @@ model = AutoModelForSequenceClassification.from_pretrained("davidlandeo/finetuni
 
 Once you run the next code, it will ask you for a token from HuggingFace. 
 
+```
+# Log in to your Hugging Face account 
+# Get your API token here https://huggingface.co/settings/token
+from huggingface_hub import notebook_login
+notebook_login()
+```
+
+
 Just copy the one you got from your account and click on ```Login```. 
 
 <p>
@@ -245,7 +253,7 @@ with open('WhatsApp BTS.txt',mode='r', encoding="utf8") as f2:
     print(chat[:700])
 ```
 
-With the following lines of code we convert the variable chat (string) to a list that contains all the messages saved, after deleting the information about the time and the date every message had. 
+With the following lines of code we convert the variable chat (string) to a list that contains all the messages saved, after deleting the information about the time and the date every message have. 
 
 ```
 # This new list (new_chat) is gonna store individual messages after every new line(\n)
@@ -290,7 +298,7 @@ for i in range(len(new_chat)):
 
 ### E - Average sentiment
 
-This cell get the average sentiment of all the messages of the whole chat. 
+This cell get the average sentiment of all the messages of the chat. 
 
 ```
 negative_values = []
@@ -351,7 +359,7 @@ for name in names:
 
 There are roughly 60 people in this WhatsApp group, but here I'm going to present only the first 10 of the list. 
 
-They are not ordered by score and some of them doesn't have name because neither I don't know them nor know their names. 
+They are not ordered by score and some of them doesn't have a name because I don't know them. 
 
 Some of them doesn't have a score because not everyone send messages.
 
@@ -374,7 +382,7 @@ This graph presents the score of some of the people presented in the WhatsApp gr
 
 There are some predictions that were not made correctly like the following examples: 
 
-- According to the model, this message is negative (because in label says LABEL_0) with the score of 0.77, but it's not because the message is congratulating someone. 
+- According to the model, this message is negative (because the label key says LABEL_0) with the score of 0.77, but it's not negative because the message is congratulating someone. 
  
 ```
 i = 1260
@@ -388,7 +396,7 @@ val
 </p>
 
 
-- According to the model, this message is negative (because in label says LABEL_0) with the score of 0.81, but it's not because the message is asking about to play beach volleyball. It should be more neutral than positive or negative. 
+- According to the model, this message is negative (because the label key says LABEL_0) with the score of 0.81, but it's not negative because the message is asking about to play beach volleyball. It should be more neutral than positive or negative. 
  
 ```
 i = 476
@@ -418,7 +426,7 @@ val
 
 ## IX - Best comment
 
-In this case, according to the model, this is the best positive comment of all the WhatsApp chat
+In this case, according to the model, this is the best positive comment of all the messages of the chat.
 
 <p>
   <img src="./Screenshots/obs4.png" width="700">
