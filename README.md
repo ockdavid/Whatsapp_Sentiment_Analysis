@@ -55,7 +55,7 @@ This repository provides the **whole code** that works perfectly, **comments** t
   - [A - Import and build the model](#a---import-and-build-the-model)
   - [B - How to Log In](#b---how-to-log-in)
   - [C - Train the model](#c---train-the-model)
-  - [D - Export and clean data](#d---export-and-clean-data)
+  - [D - Import and clean data](#d---import-and-clean-data)
   - [E - Average sentiment](#e---average-sentiment)
   - [F - Sentiment of the chat members](#f---sentiment-of-the-chat-members)
 - [VII - Results](#vii---results)
@@ -233,23 +233,188 @@ With the next line of code you can see the accuracy and the result of other metr
 trainer.evaluate()
 ```
 
+### D - Import and clean data
 
+With this code we import the whatsapp file that is a text file. 
 
+```
+with open('WhatsApp BTS.txt',mode='r', encoding="utf8") as f2:
+    chat = f2.read()
+    print('size of chat:',len(chat))
+    print('variable type:',type(chat))
+    print(chat[:700])
+```
 
-### D - Export and clean data
+With the following lines of code we convert the variable chat (string) to a list that contains all the messages saved, after deleting the information about the time and the date every message had. 
+
+```
+# This new list (new_chat) is gonna store individual messages after every new line(\n)
+new_chat = []
+a = 0
+b = 0
+
+# Splitting the whole string on each \n  
+while chat.find('\n', a+1) != -1:
+    a = chat.find('\n',b)
+    b = chat.find('\n',a+1)
+    new_chat.append(chat[a+1:b])
+
+# create an empty set to store the names of every member of the whatsapp Group
+names = set()
+
+no_valid_data = 0
+
+# new list that will not include the time and date
+cleaned_chat = []
+
+for i in range(len(new_chat)):
+  # we verify if there is a colon 
+    if (new_chat[i].count(':')):
+      # Messages has at least 2 colons, that's why I'm filtering if there is only one
+        if (new_chat[i].count(':') == 1) :
+            no_valid_data = no_valid_data + 1
+        else:
+            # Findind the positions of the colons, slash, and the hyphen
+            first_colon = new_chat[i].find(':')
+            second_colon = new_chat[i].find(':',first_colon+1)
+            slash = new_chat[i].find('/')
+            hyphen = new_chat[i].find('-')
+            
+            # With the positions of the colons and the slash, we can evaluate if the message is valid to assign to a person
+            if (first_colon>=9) and (first_colon<=13) and (slash<4):    
+              nombre = new_chat[i][hyphen+2:second_colon]
+              names.add(nombre)
+              cleaned_chat.append(new_chat[i][hyphen+2:])
+```
+
 
 ### E - Average sentiment
 
+This cell get the average sentiment of all the messages of the whole chat. 
+
+```
+negative_values = []
+positive_values = []
+
+for mssge in cleaned_chat:
+  
+  val = sentiment_model(mssge)                        # Analyze the sentiment of every message
+
+  if val[0].get('score') >= 0.55:                     # The score has to be at least 0.55 to be counted
+                                                      # Less than 0.55 doesn't make much sense
+    if val[0].get('label') == 'LABEL_0':
+      negative_values.append(val[0].get('score'))     # LABEL_0 means it's negative
+    else:
+      positive_values.append(val[0].get('score'))     # LABEL_1 means it's negative
+```
+
+
 ### F - Sentiment of the chat members
+
+The sentiment of each message will be evaluate it and each score will be saved on a list of the owner's message.
+
+```
+# Create a dictionary with the names of all the members of the whatsapp group
+# For negative and positive messages
+
+name_lists_positive = {name: [] for name in names}
+name_lists_negative = {name: [] for name in names}
+
+# Get the sentiment analysis of each person
+for mssge in cleaned_chat:
+  first_colon = mssge.find(':')
+  val = sentiment_model(mssge)                                  # Evaluate the sentiment of each message
+  nombre = mssge[:first_colon]                                  # Get only the name of the person who sent the message
+  
+  # Save the result of its sentiment of each person in the dictionary
+  if (nombre in names):
+    if (val[0].get('label')== 'LABEL_0'):
+      name_lists_negative[nombre].append(val[0].get('score'))
+    elif (val[0].get('label')== 'LABEL_1'):
+      name_lists_positive[nombre].append(val[0].get('score'))
+
+# Get the average of all the messages' sentiment that are positive of everyone
+
+average_positive = {name: [] for name in names}
+for name in names:
+  average_positive[name].append(np.mean(name_lists_positive[name]))
+
+# Get the average of all the messages' sentiment that are positive of everyone
+
+average_negative = {name: [] for name in names}
+for name in names:
+  average_negative[name].append(np.mean(name_lists_negative[name]))
+```
 
 
 ## VII - Results
 
-See [CONTRIBUTING.md](assets/docs/CONTRIBUTING.md) for more informations.
+There are roughly 60 people in this WhatsApp group, but here I'm going to present only the first 10 of the list. 
+
+They are not ordered by score and some of them doesn't have name because neither I don't know them nor know their names. 
+
+Some of them doesn't have a score because not everyone send messages.
+
+```
+Positive_results
+```
+
+<p>
+  <img src="./Screenshots/list_10_positive.png" width="500">
+</p>
+
+This graph presents the score of some of the people presented in the WhatsApp group.
+
+<p>
+  <img src="./Screenshots/plotly_positive.png" width="800">
+</p>
+
 
 ## VIII - Observations
 
-Under [MIT](./LICENSE) license.
+There are some predictions that were not made correctly like the following examples: 
+
+- According to the model, this message is negative (because in label says LABEL_0) with the score of 0.77, but it's not because the message is congratulating someone. 
+ 
+```
+i = 1260
+val = sentiment_model(cleaned_chat[i])
+print(cleaned_chat[i])
+val
+```
+
+<p>
+  <img src="./Screenshots/obs1.png" width="700">
+</p>
+
+
+- According to the model, this message is negative (because in label says LABEL_0) with the score of 0.81, but it's not because the message is asking about to play beach volleyball. It should be more neutral than positive or negative. 
+ 
+```
+i = 476
+val = sentiment_model(cleaned_chat[i])
+print(cleaned_chat[i])
+val
+```
+
+<p>
+  <img src="./Screenshots/obs2.png" width="700">
+</p>
+
+
+- But there are some cases where the model, aparently, predicted corrrectly.
+ 
+```
+i = 233
+val = sentiment_model(cleaned_chat[i])
+print(cleaned_chat[i])
+val
+```
+
+<p>
+  <img src="./Screenshots/obs3.png" width="700">
+</p>
+
 
 ## IX - Best comment
 
