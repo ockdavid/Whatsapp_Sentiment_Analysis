@@ -47,6 +47,10 @@ This repository provides the **whole code** that works perfectly, **comments** t
 - [III - Folder structure](#iii---folder-structure)
 - [IV - Getting started](#iv---getting-started)
 - [V - Requirements](#v---requirements)
+  - [A - Export WhatsApp chat](#a---export-whatsapp-chat)
+  - [B - Download code](#b---download-code)
+  - [C - Google Colab](#c---google-colab)
+  - [D - HuggingFace](#d---huggingface)
 - [VI - How the code works](#vi---how-the-code-works)
   - [A - Import and build the model](#a---import-and-build-the-model)
   - [B - How to Log In](#b---how-to-log-in)
@@ -70,18 +74,41 @@ The structure of this project.
 
 ## IV - Getting started
 🚀
-### A - Commit conventions
-
-```
-tag(scope): #issue_id - message
-```
-
-See [COMMIT_CONVENTIONS.md](assets/docs/COMMIT_CONVENTIONS.md) for more informations.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+See deployment for notes on how to deploy the project on a live system. 
 
 
 ## V - Requirements
+There are some requirements to follow whether you want to play with this code.
 
-### B - CD
+### A - Export WhatsApp chat
+Go to the WhatsApp chat you want to export and click on the 3 points that are on the right corner.
+
+There will appear some options, click on More.
+<p>
+  <img src="./Screenshots/export1.png" width="250">
+</p>
+
+Then, there will be other options, click on export chat. 
+Select the option without media and save it where you want. 
+<p>
+  <img src="./Screenshots/export2.png" width="250">
+</p>
+
+### B - Download code
+
+Go to the repository web page and click on the green button Code. 
+
+You can download the zip or clon the repository on your local computer.
+<p>
+  <img src="./Screenshots/download_code.png" width="250">
+</p>
+
+Once you get all the file, you have to look for the file Whatsapp_sentiment_analysis_BTS.ipynb
+
+```
+Whatsapp_sentiment_analysis_BTS.ipynb
+```
 
 [![DOCKER](https://github.com/gogolcorp/go-yave/actions/workflows/cd.docker.yml/badge.svg)](https://github.com/gogolcorp/go-yave/actions/workflows/cd.docker.yml)
 
