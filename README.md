@@ -77,6 +77,8 @@ The structure of this project.
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 See deployment for notes on how to deploy the project on a live system. 
 
+In this Readme file is gonna be explained some parts of the code because the ipynb file already has comments that explain everything.
+
 
 ## V - Requirements
 There are some requirements to follow whether you want to play with this code.
@@ -101,7 +103,7 @@ Go to the repository web page and click on the green button Code.
 
 You can download the zip or clon the repository on your local computer.
 <p>
-  <img src="./Screenshots/download_code.png" width="250">
+  <img src="./Screenshots/download_code.png" width="750">
 </p>
 
 Once you get all the file, you have to look for the file Whatsapp_sentiment_analysis_BTS.ipynb
@@ -110,52 +112,129 @@ Once you get all the file, you have to look for the file Whatsapp_sentiment_anal
 Whatsapp_sentiment_analysis_BTS.ipynb
 ```
 
-[![DOCKER](https://github.com/gogolcorp/go-yave/actions/workflows/cd.docker.yml/badge.svg)](https://github.com/gogolcorp/go-yave/actions/workflows/cd.docker.yml)
+### C - Google Colab
+Register or sign up on Google Colab and open a new notebook. 
 
-The **CD** workflow is located at [.github/workflows/cd.docker.yml](.github/workflows/cd.docker.yml). It's triggered a **each push** on **`main` branch**.
+On File click on Upload notebook and select the notebook we just download from the repository.
+<p>
+  <img src="./Screenshots/colab_notebook.png" width="600">
+</p>
 
-It consist of:
 
-- **login** into the GitHub container registry (ghcr.io)
-- **build and push** the Golang api using the **production Dockerfile** located at [build/pakage/sample-api/Dockerfile](build/pakage/sample-api/Dockerfile)
+Or just press Ctrl + O to upload the ipynb file. 
 
-After that, you can check the **pushed container** at: `https://github.com/<username>?tab=packages&repo_name=<repository-name>`
+<p>
+  <img src="./Screenshots/upload_notebook.png" width="400">
+</p>
 
-> IMPORTANT: you need to **update the production Dockerfile** with your **username** AND **_repository name_**. Otherwise, there will be errors at push:
+Once you uploade the ipynb, the notebook will be ready to run the cells. 
 
-```bash
-LABEL org.opencontainers.image.source = "https://github.com/<username>/<repository-name>"
-```
+<p>
+  <img src="./Screenshots/colab_uploaded.png" width="700">
+</p>
+
+
+### D - HuggingFace
+
+To train the model you have to sign up or log in on HuggingFace webpage. The process is very simple and fast. 
+
+Once you are logged in, go to settings and click on Access Tokens to create a new token, copy it and save it to use it later. 
+
+<p>
+  <img src="./Screenshots/huggingface_token.png" width="600">
+</p>
+
 
 ## VI - How the code works
 
-The project use **Docker** and **Docker Compose** to build and run local and distant images in our workspace.
+Only some lines of code are going to be explained here.
 
 ### A - Import and build the model
 
-All the images use the **same network**, more informations at [docker-compose.yml](docker-compose.yml)
+Let's import some libraries.
 
-| CONTAINER | PORT        | IMAGE                                                                    |
-| :-------- | :---------- | :----------------------------------------------------------------------- |
-| GOLANG    | `3333:3333` | [build/pakage/sample-api/Dockerfile](build/pakage/sample-api/Dockerfile) |
-| ADMINER   | `3334:8080` | [build/package/adminer/Dockerfile](build/package/adminer/Dockerfile)     |
-| POSTGRES  | `5432:5432` | [postgres:latest](https://hub.docker.com/_/postgres)                     |
+```bash
+# Install required libraries
+!pip install datasets transformers huggingface_hub
+!apt-get install git-lfs
+import torch
 
-> Adminer is a GUI that allows us to **manage your database** by permetting to to **create, edit, delete** the different entities, tables, etc.
+# Load data
+from datasets import load_dataset
+imdb = load_dataset("imdb")
+
+# Set DistilBERT tokenizer
+from transformers import AutoTokenizer
+tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
+```
+
+We run this code to build the model.
+
+```
+# Define DistilBERT as our base model:
+from transformers import AutoModelForSequenceClassification
+model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased", num_labels=2)
+
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+tokenizer = AutoTokenizer.from_pretrained("davidlandeo/finetuning-sentiment-model-3000-samples", use_auth_token=access_token)
+
+model = AutoModelForSequenceClassification.from_pretrained("davidlandeo/finetuning-sentiment-model-3000-samples", use_auth_token=access_token)
+```
 
 ### B - How to Log In
 
-#### TL;DR <!-- omit in toc -->
+Once you run the next code, it will ask you for a token from HuggingFace. 
 
-```bash
-make setup-env start logs
-```
+Just copy the one you got from your account and click on ```Login```. 
 
-#### `make help` <!-- omit in toc -->
+<p>
+  <img src="./Screenshots/huggingface_token.png" width="600">
+</p>
 
-**Display** informations about other commands.
 
 ### C - Train the model
+
+First, we define some parameters that will train the model.
+
+```
+repo_name = "davidlandeo/finetuning-sentiment-model-3000-samples"
+
+training_args = TrainingArguments(
+    output_dir=repo_name,
+    learning_rate=2e-5,
+    per_device_train_batch_size=16,
+    per_device_eval_batch_size=16,
+    num_train_epochs=2,
+    weight_decay=0.01,
+    save_strategy="epoch", 
+    push_to_hub=True,
+)
+
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=tokenized_train,
+    eval_dataset=tokenized_test,
+    tokenizer=tokenizer,
+    data_collator=data_collator,
+    compute_metrics=compute_metrics,
+)
+```
+
+And, finally, traing the model. It will take some minutes to finish training.
+
+```
+trainer.train()
+```
+
+With the next line of code you can see the accuracy and the result of other metrics the model got after be trained. 
+
+```
+trainer.evaluate()
+```
+
+
+
 
 ### D - Export and clean data
 
