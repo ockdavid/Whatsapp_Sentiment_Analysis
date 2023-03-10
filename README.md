@@ -45,13 +45,19 @@ This repository provides the **whole code** that works perfectly, **comments** t
 - [I - Introduction](#i---introduction)
 - [II - Table of content](#ii---table-of-content)
 - [III - Folder structure](#iii---folder-structure)
-- [IV - Getting started](#iv---conventions-templates-and-labels)
-- [V - Requirements](#v---cicd-release-and-container-registry)
-- [VI - How to understand](#vi---project-setup)
-  - [A - Stack](#a---stack)
-  - [B - Makefile](#b---makefile)
-- [VII - Contributing](#vii---contributing)
-- [VIII - License](#viii---license)
+- [IV - Getting started](#iv---getting-started)
+- [V - Requirements](#v---requirements)
+- [VI - How the code works](#vi---how-the-code-works)
+  - [A - Import and build the model](#a---import-and-build-the-model)
+  - [B - How to Log In](#b---how-to-login)
+  - [C - Train the model](#c---train-the-model)
+  - [D - Export and clean data](#d---export-and-clean-data)
+  - [E - Average sentiment](#d---average-sentiment)
+  - [F - Sentiment of the chat members](#f---sentiment-of-the-chat-members)
+- [VII - Results](#vii---results)
+- [VIII - Observations](#viii---observations)
+- [IX - Best comment](#ix---best-comment)
+- [X - Conclusions](#x---conclusions)
 
 ## III - Folder structure
 
@@ -62,8 +68,8 @@ The structure of this project.
 - `/Screenshots`: Images to show on Readme
 - `/Drafts`: Some notebook drafts before the main code 
 
-## IV - Conventions, templates and labels
-
+## IV - Getting started
+🚀
 ### A - Commit conventions
 
 ```
@@ -72,42 +78,8 @@ tag(scope): #issue_id - message
 
 See [COMMIT_CONVENTIONS.md](assets/docs/COMMIT_CONVENTIONS.md) for more informations.
 
-### B - Branch naming convention
 
-```
-type_scope-of-the-work
-```
-
-See [BRANCH_NAMING_CONVENTIONS.md](assets/docs/BRANCH_NAMING_CONVENTIONS.md) for more informations.
-
-### C - Issue template
-
-See [user-story.md](.github/ISSUE_TEMPLATE/user-story.md) for more informations.
-
-### D - Pull request template
-
-See [pull_request_template.md](.github/pull_request_template.md) for more informations.
-
-### E - Custom issues labels preset
-
-The labels preset is located at [.github/settings.yml](.github/settings.yml).
-
-You can **add, edit or remove** them. To automatically update these labels, you need to **install** the ["Settings" GitHub app](https://github.com/apps/settings), which will **syncs repository settings defined in the file above to your repository**.
-
-## V - CI/CD, release and container registry
-
-### A - CI
-
-[![GO](https://github.com/gogolcorp/go-yave/actions/workflows/ci.go.yml/badge.svg)](https://github.com/gogolcorp/go-yave/actions/workflows/ci.go.yml)
-
-The **CI** workflow is located at [.github/workflows/ci.go.yml](.github/workflows/ci.go.yml). It's triggered a **each push** on **all branches**.
-
-It consist of:
-
-- **install Golang** on the VM
-- get the dependancies **using the cache of other Actions run**
-- **lint the files** to check or syntax errors
-- **build** the application
+## V - Requirements
 
 ### B - CD
 
@@ -128,34 +100,11 @@ After that, you can check the **pushed container** at: `https://github.com/<user
 LABEL org.opencontainers.image.source = "https://github.com/<username>/<repository-name>"
 ```
 
-### C - Release
-
-[![RELEASE](https://github.com/gogolcorp/go-yave/actions/workflows/md.release.yml/badge.svg)](https://github.com/gogolcorp/go-yave/actions/workflows/md.release.yml)
-
-The **release** workflow is located at [.github/workflows/md.release.yml](.github/workflows/md.release.yml). It's triggered **manually by user input** at: [Actions > RELEASE](https://github.com/gogolcorp/go-yave/actions/workflows/md.release.yml).
-
-> IMPORTANT: you need to set the **image tag** in the action input, for the action to be able to push the docker image and create a release **with a specific version**. The image tag is a [SemVer](https://en.wikipedia.org/wiki/Software_versioning) tag, e.g. `1.0.2`.
-
-It consist of:
-
-- check if the **environment match the branch**
-- do the CD (docker) action again, but **with a specific image tag**
-- create a release **with the same tag**, filled with the **generated changelog as closed issues since the last release**
-
-After that, you can check the release at `https://github.com/<username>/<repository-name>/releases`.
-
-### D - Labeler
-
-[![LABELER](https://github.com/gogolcorp/go-yave/actions/workflows/ci.labeler.yml/badge.svg)](https://github.com/gogolcorp/go-yave/actions/workflows/ci.labeler.yml)
-
-The **labeler** workflow consists in **assigning specific labels** on **pull requests** according to the files that have been modified in the **commits attached to this pull request**.
-
-
-## VI - Project setup
+## VI - How the code works
 
 The project use **Docker** and **Docker Compose** to build and run local and distant images in our workspace.
 
-### A - Stack
+### A - Import and build the model
 
 All the images use the **same network**, more informations at [docker-compose.yml](docker-compose.yml)
 
@@ -167,7 +116,7 @@ All the images use the **same network**, more informations at [docker-compose.ym
 
 > Adminer is a GUI that allows us to **manage your database** by permetting to to **create, edit, delete** the different entities, tables, etc.
 
-### B - Makefile
+### B - How to Log In
 
 #### TL;DR <!-- omit in toc -->
 
