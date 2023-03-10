@@ -77,11 +77,11 @@ The structure of this project.
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 See deployment for notes on how to deploy the project on a live system. 
 
-In this Readme file is gonna be explained some parts of the code because the ipynb file already has comments that explain everything.
+In this Readme file is gonna be explained only some parts of the code because the ipynb file already has comments that explain everything.
 
 
 ## V - Requirements
-There are some requirements to follow whether you want to play with this code.
+There are some requirements to follow whether you want to play with this notebook.
 
 ### A - Export WhatsApp chat
 Go to the WhatsApp chat you want to export and click on the 3 points that are on the right corner.
