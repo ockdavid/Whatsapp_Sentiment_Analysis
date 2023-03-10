@@ -402,7 +402,7 @@ val
 </p>
 
 
-- But there are some cases where the model, aparently, predicted corrrectly.
+- But there are some cases where the model, aparently, predicted corrrectly. LABEL_1 means the message is positive. 
  
 ```
 i = 233
@@ -418,6 +418,11 @@ val
 
 ## IX - Best comment
 
+In this case, according to the model, this is the best positive comment of all the WhatsApp chat
+
+<p>
+  <img src="./Screenshots/obs4.png" width="700">
+</p>
 
 ## X - Conclusions
 
