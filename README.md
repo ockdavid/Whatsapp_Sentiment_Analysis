@@ -49,10 +49,10 @@ This repository provides the **whole code** that works perfectly, **comments** t
 - [V - Requirements](#v---requirements)
 - [VI - How the code works](#vi---how-the-code-works)
   - [A - Import and build the model](#a---import-and-build-the-model)
-  - [B - How to Log In](#b---how-to-login)
+  - [B - How to Log In](#b---how-to-log-in)
   - [C - Train the model](#c---train-the-model)
   - [D - Export and clean data](#d---export-and-clean-data)
-  - [E - Average sentiment](#d---average-sentiment)
+  - [E - Average sentiment](#e---average-sentiment)
   - [F - Sentiment of the chat members](#f---sentiment-of-the-chat-members)
 - [VII - Results](#vii---results)
 - [VIII - Observations](#viii---observations)
@@ -128,30 +128,31 @@ make setup-env start logs
 
 **Display** informations about other commands.
 
-#### `make setup-env` <!-- omit in toc -->
+### C - Train the model
 
-**Copy** the sample environment files.
+### D - Export and clean data
 
-#### `make start` <!-- omit in toc -->
+### E - Average sentiment
 
-Up the containers with **full cache reset** to avoid cache errors.
+### F - Sentiment of the chat members
 
-#### `make stop` <!-- omit in toc -->
 
-**Down** the containers.
-
-#### `make logs` <!-- omit in toc -->
-
-**Display and follow** the logs.
-
-#### `make lint` <!-- omit in toc -->
-
-**Lint** the Go files using `gofmt`.
-
-## VII - Contributing
+## VII - Results
 
 See [CONTRIBUTING.md](assets/docs/CONTRIBUTING.md) for more informations.
 
-## VIII - License
+## VIII - Observations
 
 Under [MIT](./LICENSE) license.
+
+## IX - Best comment
+
+
+## X - Conclusions
+
+* The model has a overfitting problem. 
+
+* Some sentiment analysis libraries determine whether data is positive, negative or neutral. This model doesn't give off neutral outputs.
+
+* Not all the comments can be positive or negative, this model should implement neutral outputs.
+
