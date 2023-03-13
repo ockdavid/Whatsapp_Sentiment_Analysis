@@ -253,7 +253,7 @@ with open('WhatsApp BTS.txt',mode='r', encoding="utf8") as f2:
     print(chat[:700])
 ```
 
-With the following lines of code we convert the variable chat (string) to a list that contains all the messages saved, after deleting the information about the time and the date every message have. 
+With the following lines of code I delete the information about the time and the date every message have. Afterwards, I convert the variable chat (string) to a list that contains all the cleaned messages.
 
 ```
 # This new list (new_chat) is gonna store individual messages after every new line(\n)
