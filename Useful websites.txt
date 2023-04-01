@@ -5,3 +5,4 @@ https://www.kaggle.com/code/majinx/nlp-eda-tfidf-wordcloud-lemmatization
 https://www.kaggle.com/code/rohitgadhwar/sentiment-analysis-using-transformers
 https://www.nltk.org/ 	
 https://www.kdnuggets.com/2018/03/5-things-sentiment-analysis-classification.html
+https://huggingface.co/course/chapter2/2?fw=pt
