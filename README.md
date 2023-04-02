@@ -21,9 +21,10 @@ Commands
 
 <p align="center">
   
+  <img src="./Screenshots/sqlite3.png" width="120">
   <img src="./Screenshots/huggingface.png" width="120">
   <img src="./Screenshots/whatsapp_logo.png" width="120">
-
+  
 </p>
 
 
