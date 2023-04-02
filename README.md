@@ -69,10 +69,8 @@ This repository provides the **whole code** that works perfectly, **comments** t
 
 The structure of this project.
 
-- `/Chats`: Whatsapp file exported
 - `/NLP Datacamp`: Resources 
 - `/Screenshots`: Images to show on Readme
-- `/Drafts`: Some notebook drafts before the main code 
 
 ## IV - Getting started
 🚀
