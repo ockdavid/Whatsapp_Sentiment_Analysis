@@ -34,7 +34,7 @@ Commands
 
 *That's where sentiment analysis comes in.* Sentiment analysis is a **technique** used to analyze and categorize opinions expressed in a piece of text. It's commonly used in social media monitoring, market research, and customer service to understand how people feel about a product, service, or brand.
 
-In this project, we applied sentiment analysis to a WhatsApp group chat. We exported the chat to a text file and used **natural language processing** techniques to analyze the sentiments expressed in the messages. Our goal was to understand the overall sentiment of the conversation, as well as the sentiment of each person included in the chat.
+In this project, we applied sentiment analysis to a WhatsApp group chat. We exported the chat to a text file and used **natural language processing** techniques to analyze the sentiments expressed in the messages. They will be store in a **Database on SQLite** where there will be a table per person. Our goal was to understand the overall sentiment of the conversation, as well as the sentiment of each person included in the chat.
 
 The **purpose** of this repository is to demonstrate the potential of sentiment analysis in understanding the sentiment of messages on group chats and can be applied to any WhatsApp chat to gain insights into **people's feelings** about a particular topic or conversation. However, as our findings indicate, **sentiment analysis models are not perfect** and may require further refinement to increase their accuracy.
 
@@ -175,11 +175,6 @@ We run this code to build the model.
 # Define DistilBERT as our base model:
 from transformers import AutoModelForSequenceClassification
 model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased", num_labels=2)
-
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
-tokenizer = AutoTokenizer.from_pretrained("davidlandeo/finetuning-sentiment-model-3000-samples", use_auth_token=access_token)
-
-model = AutoModelForSequenceClassification.from_pretrained("davidlandeo/finetuning-sentiment-model-3000-samples", use_auth_token=access_token)
 ```
 
 ### B - How to Log In
@@ -206,7 +201,7 @@ Just copy the one you got from your account and click on ```Login```.
 First, we define some parameters that will train the model.
 
 ```
-repo_name = "davidlandeo/finetuning-sentiment-model-3000-samples"
+repo_name = "finetuning-sentiment-model-3000-samples"
 
 training_args = TrainingArguments(
     output_dir=repo_name,
@@ -242,7 +237,30 @@ With the next line of code you can see the accuracy and the result of other metr
 trainer.evaluate()
 ```
 
-### D - Import and clean data
+### D - Store comments in a Database
+
+With this code we stablish a connection with SQLite, create a database and a table per person. 
+
+```
+def insert_database(name, comment, pos_score, neg_score):
+    database_name = 'Comments.db' 
+    connection = sqlite3.connect(database_name)
+    cursor = connection.cursor()
+
+    cursor.execute(f"CREATE TABLE IF NOT EXISTS {name}(Comment TEXT, Positive_Score INT, Negative_Score INT)")
+    cursor.execute(f'''
+                    INSERT INTO {name}(Comment, Positive_Score, Negative_Score)
+                    VALUES (?,?,?)
+                    ''',
+                    [comment, pos_score, neg_score])
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return
+```
+
+
+### E - Import and clean data
 
 With this code we import the whatsapp file that is a text file. 
 
@@ -292,12 +310,14 @@ for i in range(len(new_chat)):
             # With the positions of the colons and the slash, we can evaluate if the message is valid to assign to a person
             if (first_colon>=9) and (first_colon<=13) and (slash<4):    
               nombre = new_chat[i][hyphen+2:second_colon]
-              names.add(nombre)
+              nombre = nombre.replace(" ","_")
+              if (nombre.find('+')<0):
+                names.add(nombre)
               cleaned_chat.append(new_chat[i][hyphen+2:])
 ```
 
 
-### E - Average sentiment
+### F - Average sentiment
 
 This cell get the average sentiment of all the messages of the chat. 
 
@@ -318,47 +338,52 @@ for mssge in cleaned_chat:
 ```
 
 
-### F - Sentiment of the chat members
+### G - Sentiment of the chat members
 
 The sentiment of each message will be evaluate it and each score will be saved on a list of the owner's message.
 
 ```
 # Create a dictionary with the names of all the members of the whatsapp group
 # For negative and positive messages
-
+import pandas as pd
 name_lists_positive = {name: [] for name in names}
 name_lists_negative = {name: [] for name in names}
 
 # Get the sentiment analysis of each person
-for mssge in cleaned_chat:
-  first_colon = mssge.find(':')
-  val = sentiment_model(mssge)                                  # Evaluate the sentiment of each message
-  nombre = mssge[:first_colon]                                  # Get only the name of the person who sent the message
-  
-  # Save the result of its sentiment of each person in the dictionary
-  if (nombre in names):
-    if (val[0].get('label')== 'LABEL_0'):
-      name_lists_negative[nombre].append(val[0].get('score'))
-    elif (val[0].get('label')== 'LABEL_1'):
-      name_lists_positive[nombre].append(val[0].get('score'))
+for row in cleaned_chat:
+  first_colon = row.find(':')
+  comment = row[first_colon+2:]
+  if (comment.count('/')<3) & (comment.find('Media omitted')<0): 
+    val = sentiment_model(comment)                                  # Evaluate the sentiment of each message
+    nombre = row[:first_colon]                                  # Get only the name of the person who sent the message
+    nombre = nombre.replace(" ","_")
 
-# Get the average of all the messages' sentiment that are positive of everyone
+    # Save the result of its sentiment of each person in the dictionary
+    if (nombre in names):
+      if (val[0].get('label')== 'LABEL_0'):
+        name_lists_negative[nombre].append(round(val[0].get('score'),3))
+        insert_database(nombre, comment, '', round(val[0].get('score'),3))
+      elif (val[0].get('label')== 'LABEL_1'):
+        name_lists_positive[nombre].append(round(val[0].get('score'),3))
+        insert_database(nombre, comment, round(val[0].get('score'),3), '')
 
-average_positive = {name: [] for name in names}
-for name in names:
-  average_positive[name].append(np.mean(name_lists_positive[name]))
+  # Get the average of all the messages' sentiment that are positive of everyone
 
-# Get the average of all the messages' sentiment that are positive of everyone
+  average_positive = {name: [] for name in names}
+  for name in names:
+    average_positive[name].append(np.mean(name_lists_positive[name]))
 
-average_negative = {name: [] for name in names}
-for name in names:
-  average_negative[name].append(np.mean(name_lists_negative[name]))
+  # Get the average of all the messages' sentiment that are positive of everyone
+
+  average_negative = {name: [] for name in names}
+  for name in names:
+    average_negative[name].append(np.mean(name_lists_negative[name]))
 ```
 
 
 ## VII - Results
 
-There are roughly 60 people in this WhatsApp group, but here I'm going to present only the first 10 of the list. 
+There are roughly 60 people in this WhatsApp group, but here I'm going to present only the first 5 of the list. 
 
 They are not ordered by score and some of them are named "Unknown" because I don't know them. 
 
