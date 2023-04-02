@@ -460,7 +460,7 @@ val
 In this case, according to the model, this is the best positive comment of all the messages of the chat.
 
 <p>
-  <img src="./Screenshots/obs4.png" width="700">
+  <img src="./Screenshots/best_comment.png" width="700">
 </p>
 
 ## X - Conclusions
