@@ -381,7 +381,7 @@ This is how are stored the comments per person on the database:
 This graph presents the score of some of the people presented in the WhatsApp group.
 
 <p>
-  <img src="./Screenshots/plotly_positive.png" width="800">
+  <img src="./Screenshots/plotly_positive_1.png" width="800">
 </p>
 
 
