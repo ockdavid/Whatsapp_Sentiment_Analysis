@@ -375,7 +375,7 @@ Positive_results
 This is how are stored the comments per person on the database: 
 
 <p>
-  <img src="./Screenshots/sqlite2.png" width="500">
+  <img src="./Screenshots/sqlite2.png" width="800">
 </p>
 
 This graph presents the score of some of the people presented in the WhatsApp group.
