@@ -360,7 +360,7 @@ for name in names:
 
 There are roughly 60 people in this WhatsApp group, but here I'm going to present only the first 10 of the list. 
 
-They are not ordered by score and some of them doesn't have a name because I don't know them. 
+They are not ordered by score and some of them are named "Unknown" because I don't know them. 
 
 Some of them doesn't have a score because not everyone send messages.
 
