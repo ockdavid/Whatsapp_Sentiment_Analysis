@@ -369,7 +369,7 @@ Positive_results
 ```
 
 <p>
-  <img src="./Screenshots/list_10_positive.png" width="500">
+  <img src="./Screenshots/list_5_positive.png" width="500">
 </p>
 
 This is how are stored the comments per person on the database: 
