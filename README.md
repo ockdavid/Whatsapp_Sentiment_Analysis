@@ -56,9 +56,10 @@ This repository provides the **whole code** that works perfectly, **comments** t
   - [A - Import and build the model](#a---import-and-build-the-model)
   - [B - How to Log In](#b---how-to-log-in)
   - [C - Train the model](#c---train-the-model)
-  - [D - Import and clean data](#d---import-and-clean-data)
-  - [E - Average sentiment](#e---average-sentiment)
-  - [F - Sentiment of the chat members](#f---sentiment-of-the-chat-members)
+  - [D - Store comments in a Database](#d---store-comments-in-a-database) 
+  - [E - Import and clean data](#e---import-and-clean-data)
+  - [F - Average sentiment](#f---average-sentiment)
+  - [G - Sentiment of the chat members](#g---sentiment-of-the-chat-members)
 - [VII - Results](#vii---results)
 - [VIII - Observations](#viii---observations)
 - [IX - Best comment](#ix---best-comment)
@@ -68,10 +69,8 @@ This repository provides the **whole code** that works perfectly, **comments** t
 
 The structure of this project.
 
-- `/Chats`: Whatsapp file exported
 - `/NLP Datacamp`: Resources 
 - `/Screenshots`: Images to show on Readme
-- `/Drafts`: Some notebook drafts before the main code 
 
 ## IV - Getting started
 🚀
