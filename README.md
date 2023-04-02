@@ -413,19 +413,6 @@ This graph presents the score of some of the people presented in the WhatsApp gr
 
 There are some predictions that were not made correctly like the following examples: 
 
-- According to the model, this message is negative (because the label key says LABEL_0) with the score of 0.77, but it's not negative because the message is congratulating someone. 
- 
-```
-i = 1260
-val = sentiment_model(cleaned_chat[i])
-print(cleaned_chat[i])
-val
-```
-
-<p>
-  <img src="./Screenshots/obs1.png" width="700">
-</p>
-
 
 - According to the model, this message is negative (because the label key says LABEL_0) with the score of 0.81, but it's not negative because the message is asking about to play beach volleyball. It should be more neutral than positive or negative. 
  
